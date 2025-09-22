@@ -1,6 +1,9 @@
 // https://leetcode.com/problems/add-two-numbers/description/?source=submission-noac
+#include <iostream>
+
 /* Definition for singly-linked list. */
-struct ListNode {
+struct ListNode
+{
 	int val;
 	ListNode *next;
 	ListNode() : val(0), next(nullptr) {}
@@ -48,6 +51,19 @@ public:
 };
 
 void
+printNodes(ListNode* node)
+{
+	if (node) {
+		std::cout << "[" << node->val;
+		while (node->next) {
+			node = node->next;
+			std::cout << ", " << node->val;
+		}
+		std::cout << "]" << std::endl;
+	}
+}
+
+void
 deleteNode(ListNode** node)
 {
 	if (node && (*node)) {
@@ -79,6 +95,8 @@ int main()
 
 	Solution _solution;
 	ListNode* fNodeResult = _solution.addTwoNumbers(&fNode1, &fNode2);
+
+	printNodes(fNodeResult);
 
 	deleteNode(&fNodeResult);
 	deleteNode(&fNode1.next);

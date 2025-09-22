@@ -40,13 +40,19 @@ public:
 		ListNode* next = nullptr;
 		if ((l1 && l1->next) || (l2 && l2->next)) {
 			next = addTwoNumbers(l1 ? l1->next : nullptr, l2 ? l2->next : nullptr);
+			if (depth == -1 || depth > 100) {
+				if (next)
+					delete next;
+				next = nullptr;
+				return nullptr;
+			}
+		} else {
 			if (depth == -1 || depth > 100)
 				return nullptr;
-		} else {
 			next = (integerPartOfDivision ? new ListNode(integerPartOfDivision) : nullptr);
 		}
 		depth++;
-		return new ListNode(val % 10, next);
+		return ((depth == -1 || depth > 100) ? nullptr : new ListNode(val % 10, next));
 	}
 };
 
